@@ -1,4 +1,5 @@
-# [Momentum UI AngularJS](https://momentum.design/)
+# @momentum-ui/angular is deprecated an no longer maintained
+This repo is for historical reference only.
 
 Momentum UI AngularJS is a UI framework for implementing Cisco Momentum Design into web apps and sites.
 
