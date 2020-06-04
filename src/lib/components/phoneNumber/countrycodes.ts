@@ -65,6 +65,7 @@ export const CountryList: Array<ICountryCode> = [
   { name: 'Djibouti', code: 'dj', number: '253' },
   { name: 'Dominica', code: 'dm', number: '1767' },
   { name: 'Dominican Republic', code: 'do', number: '1' },
+  { name: 'Ecuador', code: 'ec', number: '593' },
   { name: 'Egypt', code: 'eg', number: '20' },
   { name: 'El Salvador', code: 'sv', number: '503' },
   { name: 'Equatorial Guinea', code: 'gq', number: '240' },
