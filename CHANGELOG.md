@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.1.17](https://github.com/momentum-design/momentum-ui/compare/@momentum-ui/angularjs@13.1.15...@momentum-ui/angularjs@13.1.16) (2020-05-18)
+
+### Bug Fix
+
+* **phone-number:** phone number input was missing Ecuador in the countrycodes list and thus could not validate numbers for that region
+
+
+
+
+
 ## [13.1.16](https://github.com/momentum-design/momentum-ui/compare/@momentum-ui/angularjs@13.1.15...@momentum-ui/angularjs@13.1.16) (2020-05-18)
 
 **Note:** Version bump only for package @momentum-ui/angularjs

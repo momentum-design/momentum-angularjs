@@ -47,3 +47,4 @@ CONTRIBUTING.md
 tslint.json
 .env
 webpack*
+dist/
