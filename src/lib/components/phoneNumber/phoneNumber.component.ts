@@ -223,6 +223,12 @@ export class PhoneNumberCtrl implements ng.IComponentController {
         if (regionCode === 'us') {
           // Temporarily allow Bahamas numbers to be validated in the US region: PROVISION-5632
           return this.phoneUtil.isValidNumberForRegion(parsedNumber, 'us') || this.phoneUtil.isValidNumberForRegion(parsedNumber, 'bs');
+        } else if (regionCode === 'gb') {
+          // In UK, Jersey and Guernsey have their own country code, JE and GG respectively.
+          // Jersey +441534xxxxxx AND Guernsey +441481xxxxxx are listed as supported in the NDC table.
+          return this.phoneUtil.isValidNumberForRegion(parsedNumber, 'gb') ||
+                  this.phoneUtil.isValidNumberForRegion(parsedNumber, 'je') ||
+                  this.phoneUtil.isValidNumberForRegion(parsedNumber, 'gg');
         } else {
           return this.phoneUtil.isValidNumberForRegion(parsedNumber, this.countryModel.code);
         }
