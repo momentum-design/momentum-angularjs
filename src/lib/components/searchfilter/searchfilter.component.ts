@@ -14,6 +14,7 @@ export class SearchFilterCtrl implements ng.IComponentController {
   public setFilterFn: (filterObject: any) => void;
   public searchItemFn: (searchObject: any) => void;
   public onCleared: () => void;
+  public isDisabled: boolean = false;
 
   public static $inject = ['$element', '$rootScope'];
   constructor (
@@ -26,6 +27,9 @@ export class SearchFilterCtrl implements ng.IComponentController {
   }
 
   public findall(): void {
+    if (this.isDisabled) {
+      return;
+    }
     this.searchStr = '';
     let tmpFilter = {
       filterValue: 'all',
@@ -35,6 +39,9 @@ export class SearchFilterCtrl implements ng.IComponentController {
   }
 
   public setFilter(filter: any): void {
+    if (this.isDisabled) {
+      return;
+    }
     this.activeFilter = filter.filterValue;
     if (angular.isFunction(this.setFilterFn)) {
       this.setFilterFn({
@@ -102,6 +109,7 @@ export class SearchFilter implements ng.IComponentOptions {
     clearAriaText: '@',
     filters: '<',
     setFilterFn: '&',
+    isDisabled: '<',
     placeholderText: '@',
     searchItemFn: '&',
     hideCount: '@',
@@ -119,9 +127,9 @@ export class SearchFilter implements ng.IComponentOptions {
           <i class="icon icon-exit-outline clear" ng-click="searchFilter.clearSearch();" aria-label="{{::searchFilter.clearAriaText}}"></i>
         </div>
       </div>
-      <div md-dropdown class="table-filter" ng-if="searchFilter.filters">
+      <div md-dropdown class="table-filter" ng-if="searchFilter.filters" md-is-disabled="searchFilter.isDisabled">
         <div md-dropdown-toggle class="dropdown-toggle filter" ng-if="!searchFilter.isLargeScreen()">
-          <button class="md-button md-button--link">
+          <button class="md-button md-button--link" ng-disabled="searchFilter.isDisabled">
             <i class="icon icon-filter"></i>
             <span class="name" ng-if="searchFilter.placeholderText && searchFilter.activeFilter === 'all'">{{::searchFilter.placeholderText}}</span>
             <span class="name" ng-if="searchFilter.activeFilter === f.filterValue" ng-repeat="f in searchFilter.filters">{{::f.name}}</span>
@@ -145,13 +153,13 @@ export class SearchFilter implements ng.IComponentOptions {
         </ul>
         <!-- TODO: Better solution than repeating the ul -->
         <ul ng-if="searchFilter.isLargeScreen()">
-          <li ng-hide="searchFilter.hideCount === 'true'" class="filter" ng-class="{'active': searchFilter.activeFilter === 'all'}" ng-click="searchFilter.setFilter({filterValue: 'all', count: searchFilter.tableCount})" ng-if="searchFilter.placeholderText && !filter.hide">
+          <li ng-hide="searchFilter.hideCount === 'true'" class="filter" ng-class="{'active': searchFilter.activeFilter === 'all' && !searchFilter.isDisabled, 'md-disabled' : searchFilter.isDisabled}" ng-click="searchFilter.setFilter({filterValue: 'all', count: searchFilter.tableCount})" ng-if="searchFilter.placeholderText && !filter.hide">
             <a>
               <span class="name">{{::searchFilter.placeholderText}}</span>
               <span ng-hide="searchFilter.hideCount === 'true'" class="count">{{searchFilter.tableCount}}</span>
             </a>
           </li>
-          <li class="filter" ng-class="{'active': searchFilter.activeFilter === filter.filterValue}" ng-repeat="filter in searchFilter.filters" ng-click="searchFilter.setFilter(filter)" ng-if="!filter.hide">
+          <li class="filter" ng-class="{'active': searchFilter.activeFilter === filter.filterValue && !searchFilter.isDisabled, 'md-disabled' : searchFilter.isDisabled}" ng-repeat="filter in searchFilter.filters" ng-click="searchFilter.setFilter(filter)" ng-if="!filter.hide">
             <a>
               <span class="name">{{::filter.name}}</span>
               <span ng-hide="searchFilter.hideCount === 'true'" class="count">{{filter.count}}</span>
