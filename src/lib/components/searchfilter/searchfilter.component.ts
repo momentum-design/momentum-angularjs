@@ -67,6 +67,9 @@ export class SearchFilterCtrl implements ng.IComponentController {
 
   public clearSearch(): void {
     this.searchStr = '';
+    if (angular.isFunction(this.onCleared)) {
+      this.onCleared();
+    }
   }
 
   public focusInput(): void {
