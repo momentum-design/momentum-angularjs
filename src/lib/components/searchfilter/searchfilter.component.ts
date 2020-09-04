@@ -163,7 +163,7 @@ export class SearchFilter implements ng.IComponentOptions {
             </a>
           </li>
           <li class="filter" ng-class="{'active': searchFilter.activeFilter === filter.filterValue && !searchFilter.isDisabled, 'md-disabled' : searchFilter.isDisabled}" ng-repeat="filter in searchFilter.filters" ng-click="searchFilter.setFilter(filter)" ng-if="!filter.hide">
-            <a>
+            <a ng-class="{'isdisabled': searchFilter.isDisabled }">
               <span class="name">{{::filter.name}}</span>
               <span ng-hide="searchFilter.hideCount === 'true'" class="count">{{filter.count}}</span>
             </a>
